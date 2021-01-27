@@ -57,10 +57,6 @@
     "test": "snyk test && jest --findRelatedTests src/index.js",
     "test:ci": "jest --findRelatedTests src/index.js"
   },
-  "peerDependencies": {
-    "react": ">=16.3",
-    "react-dom": ">=16.3"
-  },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
