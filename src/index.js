@@ -10,7 +10,7 @@ const nextProps = ({ initialProps = {} }) => handlers => async (...args) => {
     return handler(props, callHandler(nextHandler()), ...args)
   }
 
-  return callHandler(nextHandler(), ...args)(initialProps)
+  return callHandler(nextHandler())(initialProps)
 }
 
 export default nextProps
