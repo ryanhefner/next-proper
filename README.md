@@ -45,7 +45,9 @@ export const getServerSideAuthProps = async (props, next, ctx) => {
   }
 
   return next({
+    ...props,
     props: {
+      ...props.props,
       user,
     }
   })
