@@ -46,16 +46,17 @@
   "jsnext:main": "src/index.js",
   "types": "types",
   "scripts": {
-    "clean": "rimraf index.js,es,umd",
+    "clean": "rimraf index.js,es,umd,types",
     "prebuild": "npm run clean",
-    "build": "node ./tools/build.js",
+    "build": "npm run types && node ./tools/build.js",
     "watch": "babel ./src -d . --ignore __mocks__,__tests__,**/*.test.js --watch",
     "prepare": "npm run build",
     "prepublishOnly": "node ./tools/build.js",
     "push-release": "git push origin master && git push --tags",
     "dtslint": "dtslint types",
     "test": "snyk test && jest --findRelatedTests src/index.js",
-    "test:ci": "jest --findRelatedTests src/index.js"
+    "test:ci": "jest --findRelatedTests src/index.js",
+    "types": "tsc"
   },
   "peerDependencies": {
     "next": ">=9.3"

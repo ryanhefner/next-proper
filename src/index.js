@@ -1,3 +1,7 @@
+/**
+ * @param {{ initialProps: any }}
+ * @return {(handlers: ((props: any, next: (((props: any) => Promise<GetServerSidePropsResult<{ props: any } | { notFound: boolean } | { redirect: Redirect }>>), ...args: any[]) => Promise<GetServerSidePropsResults<{ props: any } | { notFound: boolean } | { redirect: Redirect }>)[]) => (...args: any[]) => Promise<GetServerSidePropsResult<{ props: any } | { notFound: boolean } | { redirect: Redirect }>>}
+ */
 const nextProps = ({ initialProps = {} }) => handlers => async (...args) => {
   let handlerIndex = -1
 

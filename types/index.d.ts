@@ -1,15 +1,8 @@
-import type { Redirect } from 'next'
-
-interface Config {
-  initialState?: any;
-}
-
-declare async function init(ctx: any): Promise<{ props: any } | { notFound: boolean } | { redirect: Redirect }>;
-
-declare function handler(props: Props, next, ...args: any[]): Promise<GetServerSidePropsResult<any>>;
-
-declare function nextHandlers(handlers: handler[]): init;
-
-declare function nextProps({ initialState }: Config): nextHandlers;
-
-export = nextProps
+export default nextProps;
+/**
+ * @param {{ initialProps: any }}
+ * @return {(handlers: ((props: any, next: (((props: any) => Promise<GetServerSidePropsResult<{ props: any } | { notFound: boolean } | { redirect: Redirect }>>), ...args: any[]) => Promise<GetServerSidePropsResults<{ props: any } | { notFound: boolean } | { redirect: Redirect }>)[]) => (...args: any[]) => Promise<GetServerSidePropsResult<{ props: any } | { notFound: boolean } | { redirect: Redirect }>>}
+ */
+declare function nextProps({ initialProps }: {
+    initialProps: any;
+}): (handlers: ((props: any, next: (props: any) => Promise<any>, ...args: any[]) => Promise<any>)[]) => (...args: any[]) => Promise<any>;
