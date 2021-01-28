@@ -4,7 +4,7 @@
 [![NPM](https://img.shields.io/npm/l/next-proper?style=flat-square)](LICENSE)
 [![npm](https://img.shields.io/npm/dt/next-proper?style=flat-square)](https://www.pkgstats.com/pkg:next-proper)
 
-Easily compile NextJS props via composed methods for `getServerSideprops` and `getStaticProps`.
+Easily compile NextJS props via composed methods for `getServerSideProps` and `getStaticProps`.
 
 ## Install
 
