@@ -3,7 +3,7 @@ const nextProps = ({ initialProps = {} }) => handlers => async (...args) => {
 
   const nextHandler = () => {
     handlerIndex++
-    return handlers[handlerIndex] || null
+    return handlers[handlerIndex] || ((props) => props)
   }
 
   const callHandler = handler => props => {
