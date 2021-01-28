@@ -57,6 +57,9 @@
     "test": "snyk test && jest --findRelatedTests src/index.js",
     "test:ci": "jest --findRelatedTests src/index.js"
   },
+  "peerDependencies": {
+    "next": ">=9.3"
+  },
   "devDependencies": {
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
@@ -70,6 +73,7 @@
     "dtslint": "^4.0.6",
     "gzip-size": "^6.0.0",
     "jest": "^26.6.3",
+    "next": "^10.0.5",
     "pretty-bytes": "^5.5.0",
     "regenerator-runtime": "^0.13.7",
     "rimraf": "^3.0.2",
