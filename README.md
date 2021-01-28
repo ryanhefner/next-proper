@@ -1,4 +1,4 @@
-# next-proper
+# ⛓ next-proper
 
 [![npm](https://img.shields.io/npm/v/next-proper?style=flat-square)](https://www.pkgstats.com/pkg:next-proper)
 [![NPM](https://img.shields.io/npm/l/next-proper?style=flat-square)](LICENSE)
@@ -28,7 +28,7 @@ Depending on your needs, or your apps logic, as you compose your prop methods, y
 
 Here’s a basic example using some simplified auth logic:
 
-*`props/getServerSideAuthProps.js`*
+_`props/getServerSideAuthProps.js`_
 
 ```
 export const getServerSideAuthProps = async (props, next, ctx) => {
@@ -52,7 +52,8 @@ export const getServerSideAuthProps = async (props, next, ctx) => {
 }
 ```
 
-*`pages/secure-page.js`*
+_`pages/secure-page.js`_
+
 ```
 import nextProps from 'next-proper'
 import { getServerSideAuthProps } from 'props/getServerSideAuthProps'
