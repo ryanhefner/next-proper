@@ -8,7 +8,6 @@
     "nextjs",
     "props",
     "getStaticProps",
-    "getInitialProp",
     "getServerSideProps"
   ],
   "author": "Ryan Hefner <hi@ryanhefner.com> (https://www.ryanhefner.com)",
