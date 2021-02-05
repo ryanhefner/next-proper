@@ -1,6 +1,6 @@
 {
   "name": "next-proper",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Easily compile NextJS props via composed methods for `getServerSideprops` and `getStaticProps`.",
   "repository": "ryanhefner/next-proper",
   "keywords": [
