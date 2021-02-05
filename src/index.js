@@ -1,7 +1,8 @@
 /**
  * nextProps - Compose props providers for `getServerSideProps` and `getStaticProps` NextJS methods.
  *
- * @param {config?: { initialProps: any }}
+ * @param {Object=} config
+ * @param {Object=} config.initialProps
  * @return {(handlers: ((props: any, next: (((props: any) => Promise<GetServerSidePropsResult<any>>), ...args: any[]) => Promise<GetServerSidePropsResults<any>>}
  */
 const nextProps = (config) => handlers => async (...args) => {
@@ -15,7 +16,7 @@ const nextProps = (config) => handlers => async (...args) => {
     return await handler(props, callHandler(nextHandler()), ...args)
   }
 
-  const { initialProps } = config || { initialProps: {} }
+  const { initialProps } = Object.assign({}, { initialProps: {} }, config)
 
   return await callHandler(nextHandler())(initialProps)
 }
