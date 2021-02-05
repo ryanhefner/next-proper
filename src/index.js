@@ -1,22 +1,23 @@
 /**
  * nextProps - Compose props providers for `getServerSideProps` and `getStaticProps` NextJS methods.
  *
- * @param {{ initialProps: any }}
- * @return {(handlers: ((props: any, next: (((props: any) => Promise<GetServerSidePropsResult<{ props: any } | { notFound: boolean } | { redirect: Redirect }>>), ...args: any[]) => Promise<GetServerSidePropsResults<{ props: any } | { notFound: boolean } | { redirect: Redirect }>)[]) => (...args: any[]) => Promise<GetServerSidePropsResult<{ props: any } | { notFound: boolean } | { redirect: Redirect }>>}
+ * @param {config?: { initialProps: any }}
+ * @return {(handlers: ((props: any, next: (((props: any) => Promise<GetServerSidePropsResult<any>>), ...args: any[]) => Promise<GetServerSidePropsResults<any>>}
  */
-const nextProps = ({ initialProps = {} }) => handlers => async (...args) => {
+const nextProps = (config) => handlers => async (...args) => {
   let handlerIndex = -1
 
-  const nextHandler = () => {
-    handlerIndex++
-    return handlers[handlerIndex] || ((props) => props)
+  const defaultHandler = async (props) => props
+
+  const nextHandler = () => handlers[++handlerIndex] || defaultHandler
+
+  const callHandler = handler => async props => {
+    return await handler(props, callHandler(nextHandler()), ...args)
   }
 
-  const callHandler = handler => props => {
-    return handler(props, callHandler(nextHandler()), ...args)
-  }
+  const { initialProps } = config || { initialProps: {} }
 
-  return callHandler(nextHandler())(initialProps)
+  return await callHandler(nextHandler())(initialProps)
 }
 
 export default nextProps
