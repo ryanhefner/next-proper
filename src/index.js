@@ -12,9 +12,8 @@ const nextProps = (config) => handlers => async (...args) => {
 
   const nextHandler = () => handlers[++handlerIndex] || defaultHandler
 
-  const callHandler = handler => async props => {
-    return await handler(props, callHandler(nextHandler()), ...args)
-  }
+  const callHandler = handler => async (props) =>
+    await handler(props, callHandler(nextHandler()), ...args)
 
   const { initialProps } = Object.assign({}, { initialProps: {} }, config)
 
