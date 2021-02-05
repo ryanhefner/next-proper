@@ -61,7 +61,7 @@ import nextProps from 'next-proper'
 import { getServerSideAuthProps } from 'props/getServerSideAuthProps'
 import { getServerSideFetchPageProps } from 'props/getServerSideFetchPageProps'
 
-export const getServerSideProps = (ctx) => nextProps([
+export const getServerSideProps = (ctx) => nextProps()([
   getServerSideAuthProps,
   getServerSideFetchPageProps,
 ])(ctx)
