@@ -3,7 +3,7 @@
  *
  * @param {Object=} config
  * @param {Object=} config.initialProps
- * @return {(handlers: ((props: any, next: (((props: any) => Promise<GetServerSidePropsResult<any>>), ...args: any[]) => Promise<GetServerSidePropsResults<any>>}
+ * @return {(handlers: ((props: any, next: (((props: any) => Promise<GetServerSidePropsResult<any> | any>), ...args: any[]) => Promise<GetServerSidePropsResults<any> | any>}
  */
 const nextProps = (config) => handlers => async (...args) => {
   let handlerIndex = -1

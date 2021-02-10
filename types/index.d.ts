@@ -4,6 +4,6 @@ export default nextProps;
  *
  * @param {Object=} config
  * @param {Object=} config.initialProps
- * @return {(handlers: ((props: any, next: (((props: any) => Promise<GetServerSidePropsResult<any>>), ...args: any[]) => Promise<GetServerSidePropsResults<any>>}
+ * @return {(handlers: ((props: any, next: (((props: any) => Promise<GetServerSidePropsResult<any> | any>), ...args: any[]) => Promise<GetServerSidePropsResults<any> | any>}
  */
-declare function nextProps(config?: any | undefined): (handlers: (props: any, next: (props: any) => Promise<any>, ...args: any[]) => Promise<any>) => any;
+declare function nextProps(config?: any | undefined): (handlers: (props: any, next: (props: any) => Promise<any | any>, ...args: any[]) => Promise<any | any>) => any;
