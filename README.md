@@ -28,10 +28,10 @@ Depending on your needs, or your apps logic, as you compose your prop methods, y
 
 Here’s a basic example using some simplified auth logic:
 
-_`props/getServerSideAuthProps.js`_
+_`props/getAuthProps.js`_
 
 ```
-export const getServerSideAuthProps = async (props, next, ctx) => {
+export const getAuthProps = async (props, next, ctx) => {
   ...Do auth stuff...
   const user = getUser(...)
 
@@ -58,12 +58,12 @@ _`pages/secure-page.js`_
 
 ```
 import nextProps from 'next-proper'
-import { getServerSideAuthProps } from 'props/getServerSideAuthProps'
-import { getServerSideFetchPageProps } from 'props/getServerSideFetchPageProps'
+import { getAuthProps } from 'props/getAuthProps'
+import { getFetchPageProps } from 'props/getServerSideFetchPageProps'
 
-export const getServerSideProps = (ctx) => nextProps()([
-  getServerSideAuthProps,
-  getServerSideFetchPageProps,
+export const getServerSideProps = (ctx) => nextProps([
+  getAuthProps,
+  getFetchPageProps,
 ])(ctx)
 ```
 

@@ -1,11 +1,12 @@
 /**
  * nextProps - Compose props providers for `getServerSideProps` and `getStaticProps` NextJS methods.
  *
- * @param {Object=} config
- * @param {Object=} config.initialProps
- * @return {(props: any, next: any, ...args: any[]) => Promise<any>}
+ * @param {Function[]} handlers
+ * @param {Object=} options
+ * @param {Object=} options.initialProps
+ * @return {(...args: any[]) => Promise<any>}
  */
-const nextProps = (config) => handlers => async (...args) => {
+const nextProps = (handlers, options) => async (...args) => {
   let handlerIndex = -1
 
   const defaultHandler = async (props) => props
@@ -15,7 +16,7 @@ const nextProps = (config) => handlers => async (...args) => {
   const callHandler = handler => async (props) =>
     await handler(props, callHandler(nextHandler()), ...args)
 
-  const { initialProps } = Object.assign({}, { initialProps: {} }, config)
+  const { initialProps } = Object.assign({}, { initialProps: {} }, options)
 
   return await callHandler(nextHandler())(initialProps)
 }
