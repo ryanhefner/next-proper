@@ -64,7 +64,7 @@ import { getFetchPageProps } from 'props/getServerSideFetchPageProps'
 export const getServerSideProps = nextProps([
   getAuthProps,
   getFetchPageProps,
-])(ctx)
+])
 ```
 
 ## License
