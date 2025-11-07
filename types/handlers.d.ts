@@ -5,6 +5,7 @@ export { fallback } from './handlers/fallback'
 export type {
   Handler,
   HandlerProps,
+  HandlerPropsWithProps,
   HandlerResult,
   NextFunction,
   NextPropsOptions,
