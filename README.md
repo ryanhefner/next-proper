@@ -3,6 +3,11 @@
 [![npm](https://img.shields.io/npm/v/next-proper?style=flat-square)](https://www.pkgstats.com/pkg:next-proper)
 [![NPM](https://img.shields.io/npm/l/next-proper?style=flat-square)](LICENSE)
 [![npm](https://img.shields.io/npm/dt/next-proper?style=flat-square)](https://www.pkgstats.com/pkg:next-proper)
+[![Coveralls github](https://img.shields.io/coveralls/github/ryanhefner/next-proper?style=flat-square)](https://coveralls.io/github/ryanhefner/next-proper)
+[![codecov](https://codecov.io/gh/ryanhefner/next-proper/branch/main/graph/badge.svg)](https://codecov.io/gh/ryanhefner/next-proper)
+[![CircleCI](https://img.shields.io/circleci/build/github/ryanhefner/next-proper?style=flat-square)](https://circleci.com/gh/ryanhefner/next-proper)
+![Known Vulnerabilities](https://snyk.io/test/github/ryanhefner/next-proper/badge.svg)
+![Twitter Follow](https://img.shields.io/twitter/follow/ryanhefner)
 
 Easily compile NextJS props via composed methods for `getServerSideProps` and `getStaticProps`.
 
