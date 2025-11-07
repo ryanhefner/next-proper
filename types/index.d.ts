@@ -13,14 +13,43 @@ export interface HandlerProps {
 export type NextFunction = (props: HandlerProps) => Promise<HandlerResult>
 
 /**
- * Result that handlers can return (matches Next.js return types).
- * Handlers can return standard Next.js responses or the result of calling next().
+ * Redirect configuration for Next.js
+ * Matches Next.js Redirect type from getServerSideProps and getStaticProps
  */
-export type HandlerResult =
-  | { props: Record<string, any> }
-  | { redirect: { destination: string; permanent: boolean } }
+export interface Redirect {
+  destination: string
+  permanent?: boolean
+  statusCode?: number
+}
+
+/**
+ * Result type matching Next.js GetServerSidePropsResult
+ * Compatible with getServerSideProps return values
+ */
+export type GetServerSidePropsResult<P = Record<string, any>> =
+  | { props: P }
+  | { redirect: Redirect }
+  | { notFound: true }
+
+/**
+ * Result type matching Next.js GetStaticPropsResult
+ * Compatible with getStaticProps return values
+ */
+export type GetStaticPropsResult<P = Record<string, any>> =
+  | { props: P }
+  | { redirect: Redirect }
   | { notFound: true }
   | { revalidate?: number | boolean }
+
+/**
+ * Result that handlers can return (matches Next.js return types).
+ * Supports all return types for getServerSideProps, getStaticProps, and related Next.js data fetching methods.
+ * Handlers can return standard Next.js responses or the result of calling next().
+ * This is a union of GetServerSidePropsResult, GetStaticPropsResult, and HandlerProps for flexibility.
+ */
+export type HandlerResult =
+  | GetServerSidePropsResult
+  | GetStaticPropsResult
   | HandlerProps
 
 /**

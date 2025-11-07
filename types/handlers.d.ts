@@ -8,4 +8,7 @@ export type {
   HandlerResult,
   NextFunction,
   NextPropsOptions,
+  Redirect,
+  GetServerSidePropsResult,
+  GetStaticPropsResult,
 } from './index'

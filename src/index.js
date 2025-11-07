@@ -10,7 +10,16 @@
  *
  * @typedef {(props: HandlerProps, next: (props: HandlerProps) => Promise<HandlerResult>, ...args: any[]) => Promise<HandlerResult>} Handler
  *
- * @typedef {Object|{props: Record<string, any>}|{redirect: {destination: string, permanent: boolean}}|{notFound: true}|{revalidate?: number|boolean}} HandlerResult
+ * @typedef {Object} Redirect
+ * @property {string} destination - Redirect destination URL
+ * @property {boolean} [permanent] - Whether the redirect is permanent
+ * @property {number} [statusCode] - HTTP status code for redirect (getServerSideProps only)
+ *
+ * @typedef {{props: Record<string, any>}|{redirect: Redirect}|{notFound: true}} GetServerSidePropsResult
+ *
+ * @typedef {{props: Record<string, any>}|{redirect: Redirect}|{notFound: true}|{revalidate?: number|boolean}} GetStaticPropsResult
+ *
+ * @typedef {GetServerSidePropsResult|GetStaticPropsResult|HandlerProps} HandlerResult
  *
  * @param {Handler[]} handlers - Array of handler functions
  * @param {NextPropsOptions} [options] - Optional configuration
