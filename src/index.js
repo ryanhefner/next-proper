@@ -6,19 +6,25 @@
  * @param {Object=} options.initialProps
  * @return {(...args: any[]) => Promise<any>}
  */
-const nextProps = (handlers, options) => async (...args) => {
-  let handlerIndex = -1
+const nextProps =
+  (handlers, options) =>
+  async (...args) => {
+    let handlerIndex = -1
 
-  const defaultHandler = async (props) => props
+    const defaultHandler = async (props) => props
 
-  const nextHandler = () => handlers[++handlerIndex] || defaultHandler
+    const nextHandler = () => handlers[++handlerIndex] || defaultHandler
 
-  const callHandler = handler => async (props) =>
-    await handler(props, callHandler(nextHandler()), ...args)
+    const callHandler = (handler) => async (props) =>
+      await handler(props, callHandler(nextHandler()), ...args)
 
-  const { initialProps } = Object.assign({}, { initialProps: {} }, options)
+    const { initialProps } = Object.assign(
+      {},
+      { initialProps: { props: {} } },
+      options,
+    )
 
-  return await callHandler(nextHandler())(initialProps)
-}
+    return await callHandler(nextHandler())(initialProps)
+  }
 
 export default nextProps
