@@ -11,10 +11,4 @@ import type {
  * @param handlers - Array of handlers to run in parallel
  * @returns Handler function
  */
-export function parallel(
-  handlers: Handler[],
-): (
-  props: HandlerProps,
-  next: NextFunction,
-  ...args: any[]
-) => Promise<HandlerResult>
+export function parallel(handlers: Handler[]): Handler

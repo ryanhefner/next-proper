@@ -18,8 +18,4 @@ export function conditional(
     | boolean
     | Promise<boolean>,
   handlers: Handler | Handler[],
-): (
-  props: HandlerProps,
-  next: NextFunction,
-  ...args: any[]
-) => Promise<HandlerResult>
+): Handler

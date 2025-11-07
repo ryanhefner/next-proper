@@ -25,8 +25,4 @@ export function fallback(
       ) => HandlerResult | Promise<HandlerResult>)
     | HandlerResult
     | Promise<HandlerResult>,
-): (
-  props: HandlerProps,
-  next: NextFunction,
-  ...args: any[]
-) => Promise<HandlerResult>
+): Handler

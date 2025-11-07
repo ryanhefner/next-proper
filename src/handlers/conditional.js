@@ -11,7 +11,7 @@
  *
  * @typedef {(props: HandlerProps, next: NextFunction, ...args: any[]) => Promise<HandlerResult>} Handler
  *
- * @param {(props: HandlerProps, ...args: any[]) => boolean|Promise<boolean>|boolean|Promise<boolean>} condition - Function that receives (props, ...args) and returns boolean, or a boolean/promise
+ * @param {((props: HandlerProps, ...args: any[]) => boolean|Promise<boolean>)|boolean|Promise<boolean>} condition - Function that receives (props, ...args) and returns boolean, or a boolean/promise
  * @param {Handler|Handler[]} handlers - Single handler or array of handlers to run if condition is true
  * @returns {Handler} Handler function
  */
