@@ -1,9 +1,19 @@
 /**
  * conditional - Run handlers conditionally based on a predicate function.
  *
- * @param {Function|Promise<boolean>|boolean} condition - Function that receives (props, ...args) and returns boolean, or a boolean/promise
- * @param {Function|Function[]} handlers - Single handler or array of handlers to run if condition is true
- * @return {Function} Handler function
+ * @typedef {Object} HandlerProps
+ * @property {Record<string, any>} [props] - Props object for Next.js
+ * @property {*} [key] - Additional metadata properties
+ *
+ * @typedef {(props: HandlerProps) => Promise<HandlerResult>} NextFunction
+ *
+ * @typedef {Object|{props: Record<string, any>}|{redirect: {destination: string, permanent: boolean}}|{notFound: true}|{revalidate?: number|boolean}} HandlerResult
+ *
+ * @typedef {(props: HandlerProps, next: NextFunction, ...args: any[]) => Promise<HandlerResult>} Handler
+ *
+ * @param {(props: HandlerProps, ...args: any[]) => boolean|Promise<boolean>|boolean|Promise<boolean>} condition - Function that receives (props, ...args) and returns boolean, or a boolean/promise
+ * @param {Handler|Handler[]} handlers - Single handler or array of handlers to run if condition is true
+ * @returns {Handler} Handler function
  */
 export const conditional = (condition, handlers) => {
   return async (props, next, ...args) => {

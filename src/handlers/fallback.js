@@ -4,10 +4,20 @@
  * If all handlers fail and a default value is provided, it is returned.
  * Otherwise, the last error is thrown.
  *
- * @param {Function[]} handlers - Array of handlers to try in sequence
- * @param {Function|Promise|any=} defaultValue - Optional default value to return if all handlers fail.
+ * @typedef {Object} HandlerProps
+ * @property {Record<string, any>} [props] - Props object for Next.js
+ * @property {*} [key] - Additional metadata properties
+ *
+ * @typedef {(props: HandlerProps) => Promise<HandlerResult>} NextFunction
+ *
+ * @typedef {Object|{props: Record<string, any>}|{redirect: {destination: string, permanent: boolean}}|{notFound: true}|{revalidate?: number|boolean}} HandlerResult
+ *
+ * @typedef {(props: HandlerProps, next: NextFunction, ...args: any[]) => Promise<HandlerResult>} Handler
+ *
+ * @param {Handler[]} handlers - Array of handlers to try in sequence
+ * @param {(props: HandlerProps, ...args: any[]) => HandlerResult|Promise<HandlerResult>|HandlerResult|Promise<HandlerResult>} [defaultValue] - Optional default value to return if all handlers fail.
  *   Can be a function that receives (props, ...args), a promise, or any value.
- * @return {Function} Handler function
+ * @returns {Handler} Handler function
  */
 export const fallback = (handlers, defaultValue) => {
   return async (props, next, ...args) => {

@@ -1,14 +1,25 @@
+import type {
+  Handler,
+  HandlerProps,
+  NextFunction,
+  HandlerResult,
+} from '../index'
+
 /**
  * conditional - Run handlers conditionally based on a predicate function.
  *
- * @param {Function|Promise<boolean>|boolean} condition - Function that receives (props, ...args) and returns boolean, or a boolean/promise
- * @param {Function|Function[]} handlers - Single handler or array of handlers to run if condition is true
- * @return {Function} Handler function
+ * @param condition - Function that receives (props, ...args) and returns boolean, or a boolean/promise
+ * @param handlers - Single handler or array of handlers to run if condition is true
+ * @returns Handler function
  */
 export function conditional(
   condition:
-    | ((props: any, ...args: any[]) => boolean | Promise<boolean>)
+    | ((props: HandlerProps, ...args: any[]) => boolean | Promise<boolean>)
     | boolean
     | Promise<boolean>,
-  handlers: Function | Function[],
-): (props: any, next: Function, ...args: any[]) => Promise<any>
+  handlers: Handler | Handler[],
+): (
+  props: HandlerProps,
+  next: NextFunction,
+  ...args: any[]
+) => Promise<HandlerResult>
