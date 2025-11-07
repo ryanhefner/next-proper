@@ -45,7 +45,7 @@
   "jsnext:main": "src/index.js",
   "types": "types",
   "scripts": {
-    "clean": "rimraf index.js,es,umd,types",
+    "clean": "rimraf index.js es umd types",
     "prebuild": "npm run clean",
     "build": "npm run types && node ./tools/build.js",
     "watch": "babel ./src -d . --ignore __mocks__,__tests__,**/*.test.js --watch",
