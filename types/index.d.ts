@@ -19,7 +19,7 @@ export type NextFunction = (props: HandlerProps) => Promise<HandlerResult>
 export interface Redirect {
   destination: string
   permanent: boolean
-  statusCode: number
+  statusCode?: number
 }
 
 /**
@@ -44,9 +44,13 @@ export type GetStaticPropsResult<P = Record<string, any>> =
 /**
  * HandlerProps with required props - used when handlers return props through the chain.
  * This type ensures compatibility with Next.js result types by requiring props to be present.
+ * Note: This is distinct from { props: P } to allow additional metadata properties.
+ * Explicitly excludes redirect and notFound to prevent type conflicts.
  */
 export type HandlerPropsWithProps = {
   props: Record<string, any>
+  redirect?: never
+  notFound?: never
   [key: string]: any
 }
 
@@ -54,14 +58,14 @@ export type HandlerPropsWithProps = {
  * Result that handlers can return (matches Next.js return types).
  * Supports all return types for getServerSideProps, getStaticProps, and related Next.js data fetching methods.
  * Handlers can return standard Next.js responses or the result of calling next().
- * HandlerPropsWithProps is included for flexibility when handlers return props through the chain.
+ * HandlerPropsWithProps is included for flexibility when handlers return props through the chain with additional metadata.
  *
  * This type excludes the standalone { revalidate } variant from GetStaticPropsResult to ensure
  * compatibility with GetServerSidePropsResult. The revalidate option can still be used as a
  * property on the props object for getStaticProps.
  */
 export type HandlerResult<P = Record<string, any>> =
-  | GetServerSidePropsResult<P>
+  | { props: P }
   | { props: P; revalidate?: number | boolean }
   | { redirect: Redirect }
   | { notFound: true }
