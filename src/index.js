@@ -1,24 +1,49 @@
 /**
  * nextProps - Compose props providers for `getServerSideProps` and `getStaticProps` NextJS methods.
  *
- * @param {Function[]} handlers
- * @param {Object=} options
- * @param {Object=} options.initialProps
- * @return {(...args: any[]) => Promise<any>}
+ * @typedef {Object} HandlerProps
+ * @property {Record<string, any>} [props] - Props object for Next.js
+ * @property {*} [key] - Additional metadata properties
+ *
+ * @typedef {Object} NextPropsOptions
+ * @property {HandlerProps} [initialProps] - Initial props object (default: `{ props: {} }`)
+ *
+ * @typedef {(props: HandlerProps, next: (props: HandlerProps) => Promise<HandlerResult>, ...args: any[]) => Promise<HandlerResult>} Handler
+ *
+ * @typedef {Object} Redirect
+ * @property {string} destination - Redirect destination URL
+ * @property {boolean} [permanent] - Whether the redirect is permanent
+ * @property {number} [statusCode] - HTTP status code for redirect (getServerSideProps only)
+ *
+ * @typedef {{props: Record<string, any>}|{redirect: Redirect}|{notFound: true}} GetServerSidePropsResult
+ *
+ * @typedef {{props: Record<string, any>}|{redirect: Redirect}|{notFound: true}|{revalidate?: number|boolean}} GetStaticPropsResult
+ *
+ * @typedef {GetServerSidePropsResult|GetStaticPropsResult|HandlerProps} HandlerResult
+ *
+ * @param {Handler[]} handlers - Array of handler functions
+ * @param {NextPropsOptions} [options] - Optional configuration
+ * @returns {(...args: any[]) => Promise<HandlerResult>} A function compatible with `getServerSideProps` or `getStaticProps`
  */
-const nextProps = (handlers, options) => async (...args) => {
-  let handlerIndex = -1
+const nextProps =
+  (handlers, options) =>
+  async (...args) => {
+    let handlerIndex = -1
 
-  const defaultHandler = async (props) => props
+    const defaultHandler = async (props) => props
 
-  const nextHandler = () => handlers[++handlerIndex] || defaultHandler
+    const nextHandler = () => handlers[++handlerIndex] || defaultHandler
 
-  const callHandler = handler => async (props) =>
-    await handler(props, callHandler(nextHandler()), ...args)
+    const callHandler = (handler) => async (props) =>
+      await handler(props, callHandler(nextHandler()), ...args)
 
-  const { initialProps } = Object.assign({}, { initialProps: {} }, options)
+    const { initialProps } = Object.assign(
+      {},
+      { initialProps: { props: {} } },
+      options,
+    )
 
-  return await callHandler(nextHandler())(initialProps)
-}
+    return await callHandler(nextHandler())(initialProps)
+  }
 
 export default nextProps
